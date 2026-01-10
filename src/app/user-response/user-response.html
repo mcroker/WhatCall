@@ -1,0 +1,7 @@
+<p>user-response works!</p>
+
+@for (item of buttons; track item) {
+<button (click)="sendResponse(item)">{{ item }}</button>
+} @empty {
+<li>There are no items.</li>
+}

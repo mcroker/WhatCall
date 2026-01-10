@@ -23,12 +23,12 @@ const firebaseConfig = {
 @Injectable({
   providedIn: 'root',
 })
-export class Videos {
+export class VideoService {
 
   private firebaseApp: FirebaseApp;
 
   constructor() {
-    // Initialize Firebase
+    // Initialize Firebasexw
     this.firebaseApp = initializeApp(firebaseConfig);
     const analytics = getAnalytics(this.firebaseApp);
   }
