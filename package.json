@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "doc": "npx typedoc --out docs --entryPointStrategy Expand src  --excludePrivate --excludeExternals --includeVersion",
+    "doc": "npx typedoc --out docs --entryPointStrategy Expand src  --exclude **/*.spec.ts --excludePrivate --excludeExternals --includeVersion",
     "uml": "tsuml2 --glob \"./src/**/!(*.d|*.spec).ts\" --outFile  ./docs/uml.svg"
   },
   "prettier": {
