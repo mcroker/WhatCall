@@ -10,4 +10,6 @@ export class RespondCompare {
 
   @Input() userResponse: string = '';
 
+  @Input() visible: boolean = true;
+  
 }

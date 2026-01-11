@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "doc": "npx typedoc --out docs --entryPointStrategy Expand src  --excludePrivate --excludeExternals --includeVersion",
+    "uml": "tsuml2 --glob \"./src/**/!(*.d|*.spec).ts\" --outFile  ./docs/uml.svg"
   },
   "prettier": {
     "printWidth": 100,
@@ -23,10 +25,12 @@
   "private": true,
   "packageManager": "npm@10.9.4",
   "dependencies": {
+    "@angular/cdk": "^21.0.6",
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
     "@angular/core": "^21.0.0",
     "@angular/forms": "^21.0.0",
+    "@angular/material": "^21.0.6",
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
     "@types/video.js": "^7.3.58",
@@ -41,6 +45,7 @@
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
     "jsdom": "^27.1.0",
+    "typedoc": "^0.28.15",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

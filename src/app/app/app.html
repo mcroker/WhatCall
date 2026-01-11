@@ -1,20 +1,9 @@
 <main class="main">
-  @for (item of videos; track item.title) {
-  <li>{{ item.title }}</li>
-  } @empty {
-  <li>There are no items.</li>
-  }
-<!--
-  <app-video-player
-    [options]="{fluid: true, aspectRatio: '16:9', autoplay: true, sources: [{
-          src: 'https://www.youtube.com/watch?v=IxQB14xVas0',
-          type: 'video/youtube',
-        }]}">
-  </app-video-player>
--->
 
-  <app-user-response [responseType]="ResponseType.full" (selection)="selectionMade($event)"></app-user-response>
-  <app-respond-compare [userResponse]="'RC1'"></app-respond-compare>
+  <app-video-player #player [source]="video?.url"></app-video-player>
+
+  <app-user-response #response [responseType]="ResponseType.full" (selection)="selectionMade($event)"></app-user-response>
+  <app-respond-compare #compare [userResponse]="userResponse" [visible]="false"></app-respond-compare>
   
 </main>
 

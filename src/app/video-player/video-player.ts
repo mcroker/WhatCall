@@ -1,11 +1,11 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import videojs from 'video.js';
 import Player from "video.js/dist/types/player";
 import 'videojs-youtube'
 
 @Component({
   selector: 'app-video-player',
-  templateUrl: './video-player.html', 
+  templateUrl: './video-player.html',
   styleUrls: [
     './video-player.scss'
   ],
@@ -13,35 +13,44 @@ import 'videojs-youtube'
 })
 
 export class VideoPlayer implements OnInit, OnDestroy {
-  @ViewChild('target', {static: true}) target!: ElementRef;
+  @ViewChild('target', { static: true }) target!: ElementRef;
+
+  private get player(): Player {
+    return videojs(this.target.nativeElement);
+  }
 
   // See options: https://videojs.com/guides/options
-  @Input() options: {
-      fluid: boolean,
-      aspectRatio: string,
-      autoplay: boolean,
-      sources: {
-          src: string,
-          type: string,
-      }[],
-  } = {
-      fluid: true,
-      aspectRatio: '16:9',
-      autoplay: false,
-      sources: [],
-  };
-
-  player: Player | undefined;
+  @Input()
+  set source(s: string | undefined) {
+    if (this.player) {
+      if (s) {
+        this.player!.src({ src: s, type: 'video/youtube' });
+        this.player!.play();
+      } else {
+        this.player!.pause();
+        this.player!.src({ src: '', type: '' });
+      }
+    } else {
+      console.warn('VideoPlayer: player not initialized yet');
+    }
+  }
+  get source(): string | undefined {
+    if (this.player) {
+      return this.player.currentSrc();
+    }
+    return undefined;
+  }
 
   constructor(
     private elementRef: ElementRef,
-  ) {}
+    private changeDetector: ChangeDetectorRef
+  ) {
+    // Constructor logic if needed
+  }
 
   // Instantiate a Video.js player OnInit
   ngOnInit() {
-    this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
-      console.log('onPlayerReady', this);
-    });
+    videojs(this.target.nativeElement, { "techOrder": ["youtube"], "youtube": { "ytControls": 2 }, fluid: true })
   }
 
   // Dispose the player OnDestroy
