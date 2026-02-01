@@ -36,7 +36,7 @@ export class App implements OnInit {
       console.log('User UID:', this.profileService.getUid());
     });
 
-    this.scenarioService.getScenario().then(scenario => {
+    this.scenarioService.getRandomScenario().then(scenario => {
       this.scenario = scenario;
       this.changeDetector.detectChanges();
     });
@@ -50,6 +50,9 @@ export class App implements OnInit {
     this.changeDetector.detectChanges();
     if (this.scenario) {
       this.responseService.addResponse(this.scenario.id, userResponse)
+      this.scenarioService.getScenarioStats(this.scenario.id).then((stats) => {
+        console.log('Stats retrieved', stats);
+      })
     } else {
       throw new Error('No scenario loaded');
     }

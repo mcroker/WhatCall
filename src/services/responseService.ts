@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   getFirestore, collection, DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter,
-  CollectionReference, 
-  addDoc
+  CollectionReference,
+  addDoc,
+  query,
+  where,
+  doc,
+  getDocs
 } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
@@ -16,6 +20,7 @@ export interface ScenarioResponse {
   scenarioId: string;
   response: string;
 }
+
 
 /**
 * Firestore data converter for Video objects.
@@ -61,13 +66,19 @@ export class ResponseService {
   }
 
   public async addResponse(scenarioId: string, response: string): Promise<void> {
-    console.log(this.profileService.getUid() )
-    await addDoc(this.responsesRef, { 
+    console.log(this.profileService.getUid())
+    await addDoc(this.responsesRef, {
       scenarioId,
       response,
       uid: this.profileService.getUid() || '',
       id: ''
     });
+  }
+
+  public async getResponsesForScenario(scenarioId: string): Promise<ScenarioResponse[]> {
+    const q = query(this.responsesRef, where("scenarioId", "==", scenarioId));
+    const d = await getDocs(q);
+    return d.docs.map(doc => doc.data());
   }
 
 }
