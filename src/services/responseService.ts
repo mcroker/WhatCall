@@ -85,7 +85,7 @@ export class ResponseService {
   public async getMyResponseForScenario(scenarioId: string): Promise<ScenarioResponse | undefined> {
     const uid = this.profileService.getUid();
     if (!uid) {
-      throw new Error('User not logged in');
+      return undefined;
     }
     const q = query(this.responsesRef,
       where("scenarioId", "==", scenarioId),

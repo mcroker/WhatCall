@@ -31,6 +31,7 @@ export class VideoPlayer implements OnInit, OnDestroy {
         this.player!.src({ src: s, type: 'video/youtube' });
         this.player!.load();
         this.player!.play();
+        this.player.autoplay('muted');
       } else {
         this.player!.pause();
         this.player!.src({ src: '', type: '' });
@@ -45,7 +46,11 @@ export class VideoPlayer implements OnInit, OnDestroy {
 
   // Instantiate a Video.js player OnInit
   ngOnInit() {
+    const self = this;
     videojs(this.target.nativeElement, { "techOrder": ["youtube"], "youtube": { "ytControls": 2 }, fluid: true })
+      .ready(() => {
+        console.log('VideoPlayer: player is ready');
+      });
   }
 
   // Dispose the player OnDestroy
