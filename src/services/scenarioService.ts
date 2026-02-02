@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
-  getFirestore, collection, getDocs, DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter,
-  CollectionReference,
-  addDoc
+  getFirestore, collection, getDocs, DocumentData, QueryDocumentSnapshot, SnapshotOptions,
+  FirestoreDataConverter, CollectionReference, doc, getDoc
 } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
@@ -77,8 +76,8 @@ export class ScenarioService {
 
   /**
    * Retrieves a random video from the Firestore 'videos' collection.
-   * 
-   * @returns A promise that resolves to a Scenario object. 
+   *
+   * @returns A promise that resolves to a Scenario object.
    */
   public async getRandomScenario(): Promise<Scenario> {
     const querySnapshot = await getDocs(this.scenariosRef);
@@ -86,11 +85,17 @@ export class ScenarioService {
     return querySnapshot.docs[randomIndex].data();
   }
 
+  public async getScenarioById(scenarioId: string): Promise<Scenario | undefined> {
+    const docRef = doc(this.scenariosRef, scenarioId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  }
+
   public async getScenarioStats(scenarioId: string): Promise<ScenarioStats> {
     const responses = await this.responseService.getResponsesForScenario(scenarioId);
     const optionCounts: { [key: string]: number } = {}
     responses.forEach(response => {
-      optionCounts[response.response] = ( optionCounts[response.response] || 0 ) + 1;
+      optionCounts[response.response] = (optionCounts[response.response] || 0) + 1;
     })
     return {
       scenarioId,
