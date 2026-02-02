@@ -28,13 +28,13 @@ export class VideoPlayer implements OnInit, OnDestroy {
   set source(s: string | undefined | null) {
       console.log("VideoPlayer: setting source to ", s);
       if (s) {
-        this.player!.src({ src: s, type: 'video/youtube' });
-        this.player!.load();
-        this.player!.play();
+        this.player.src({ src: s, type: 'video/youtube' });
+        this.player.load();
+        this.player.play();
         this.player.autoplay('muted');
       } else {
-        this.player!.pause();
-        this.player!.src({ src: '', type: '' });
+        this.player.pause();
+        this.player.src({ src: '', type: '' });
       }
   }
   get source(): string | undefined {
@@ -55,8 +55,6 @@ export class VideoPlayer implements OnInit, OnDestroy {
 
   // Dispose the player OnDestroy
   ngOnDestroy() {
-    if (this.player) {
       this.player.dispose();
-    }
   }
 }
