@@ -1,0 +1,10 @@
+<main class="main">
+  <h1>Upload Scenario</h1>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <input type="text" formControlName="scenarioType" placeholder="e.g. Scrum">
+    <input type="text" formControlName="title" placeholder="e.g. Play on or penalty?">
+    <input type="text" formControlName="url" placeholder="e.g. https://www.youtube.com">
+    <button type="submit" [disabled]="!form.valid">Save</button>
+  </form>
+</main>

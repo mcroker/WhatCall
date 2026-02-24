@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   getFirestore, collection, getDocs, DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter,
-  CollectionReference,
-  doc,
-  getDoc
+  CollectionReference, doc, getDoc, setDoc
 } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
@@ -20,6 +18,7 @@ export interface Scenario {
   title: string;
   url: string;
   uid: string;
+  scenarioType: string;
   options: string[];
 }
 
@@ -42,6 +41,7 @@ const scenarioConverter: FirestoreDataConverter<Scenario> = {
       url: data['url'],
       uid: data['uid'],
       options: data['options'],
+      scenarioType: data['scenarioType']
     } as Scenario;
   }
 };
@@ -105,7 +105,11 @@ export class ScenarioService {
     });
   }
 
- 
-
-
+  public async addScenario(scenario: Omit<Scenario, 'id'>): Promise<void> {
+    const db = getFirestore(this.firebaseService.firebaseApp);
+    const scenariosCollection = collection(db, 'scenarios').withConverter(scenarioConverter);
+    const newScenarioRef = doc(scenariosCollection);
+    await setDoc(newScenarioRef, scenario);
+    console.log('Scenario added with ID:', newScenarioRef.id);
+  }
 }

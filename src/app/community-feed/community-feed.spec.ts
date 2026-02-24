@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserResponseComponent } from './user-response';
+import { CommunityFeed } from './community-feed';
 
-describe('UserResponseComponent', () => {
-
-  let component: UserResponseComponent;
-  let fixture: ComponentFixture<UserResponseComponent>;
+describe('CommunityFeed', () => {
+  let component: CommunityFeed;
+  let fixture: ComponentFixture<CommunityFeed>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserResponseComponent]
+      imports: [CommunityFeed]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UserResponseComponent);
+    fixture = TestBed.createComponent(CommunityFeed);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
