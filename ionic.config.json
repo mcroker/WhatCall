@@ -1,0 +1,7 @@
+{
+  "name": "whatcall",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
