@@ -18,10 +18,10 @@ export class HomeComponent {
   }
 
   gotoRandomScenario() {
-    this.scenarioService.gotoRandomScenario();
+    this.router.navigate(['/scenario']);
   }
 
   gotoUploadScenario() {
-    this.router.navigate(['/scenario-upload', 1]);
+    this.router.navigate(['/scenario-upload']);
   }
 }

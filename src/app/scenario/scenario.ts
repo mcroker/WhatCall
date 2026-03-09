@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Scenario, ScenarioService } from '../../services/scenarioService';
 import { ResponseService, ScenarioStats } from '../../services/responseService';
 import { ProfileService } from '../../services/profileService';
 import { VideoPlayerComponent } from '../video-player/video-player';
 import { UserResponseComponent } from '../user-response/user-response';
 import { ResponsesChartComponent } from '../responses-chart/responses-chart';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-scenario',
@@ -24,15 +25,23 @@ export class ScenarioComponent implements OnInit {
     private scenarioService: ScenarioService,
     private responseService: ResponseService,
     private profileService: ProfileService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private router: Router,
+    private location: Location
   ) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async params => {
-      const scenarioId = params['id'];
+      let scenarioId = params['id'];
       console.log('ScenarioComponent: scenarioId from route params', scenarioId);
       await this.profileService.login();
+      if (!scenarioId) {
+        console.log('No scenario ID in route params, fetching random scenario');
+        scenarioId = (await this.scenarioService.getRandomScenario()).id;
+        this.location.replaceState(`/scenario/${scenarioId}`);
+        console.log('Got random scenario ID', scenarioId);
+      }
       const [scenario, userResponse] = await Promise.all([
         this.scenarioService.getScenarioById(scenarioId),
         this.responseService.getMyResponseForScenario(scenarioId)
@@ -64,7 +73,7 @@ export class ScenarioComponent implements OnInit {
   }
 
   gotoRandomScenario() {
-    this.scenarioService.gotoRandomScenario();
+    this.router.navigate(['/scenario']);
   }
 
 }

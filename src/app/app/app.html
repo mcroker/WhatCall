@@ -1,1 +1,21 @@
-<router-outlet />
+<button matButton="outlined" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+  Menu
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/scenario">
+    <mat-icon>sports_football</mat-icon>
+    <span>Next Question</span>
+  </button>
+  <button mat-menu-item routerLink="/scenario-upload">
+    <mat-icon>cloud_upload</mat-icon>
+    <span>Upload</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
+
+<router-outlet></router-outlet>

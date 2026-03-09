@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./scenario-upload.scss'],
   imports: [ReactiveFormsModule, CommonModule]
 })
-export class ScenarioUploadComponent implements OnInit {
+export class ScenarioUploadComponent {
 
   public form: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -23,18 +23,8 @@ export class ScenarioUploadComponent implements OnInit {
   payLoad: string = '';
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private profileService: ProfileService,
     private scenarioService: ScenarioService
   ) { }
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(async params => {
-      const scenarioId = params['id'];
-      console.log('ScenarioComponent: scenarioId from route params', scenarioId);
-      await this.profileService.login();
-    });
-  }
 
   addOption(): void {
     const optionsArray = this.form.get('options') as FormArray;
@@ -49,7 +39,7 @@ export class ScenarioUploadComponent implements OnInit {
   get optionsArray(): FormArray {
     return this.form.get('options') as FormArray;
   }
- 
+
   async save(): Promise<void> {
     try {
       const formData = this.form.value;

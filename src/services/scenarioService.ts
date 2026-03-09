@@ -61,7 +61,7 @@ export class ScenarioService {
   }
 
   constructor(
-    private firebaseService: FirebaseService, 
+    private firebaseService: FirebaseService,
     private router: Router
 
   ) {
@@ -71,8 +71,8 @@ export class ScenarioService {
 
   /**
    * Retrieves a random video from the Firestore 'videos' collection.
-   * 
-   * @returns A promise that resolves to a Scenario object. 
+   *
+   * @returns A promise that resolves to a Scenario object.
    */
   public async getRandomScenario(): Promise<Scenario> {
     const querySnapshot = await getDocs(this.scenariosRef);
@@ -82,25 +82,16 @@ export class ScenarioService {
 
   /**
    * description
-   * 
+   *
    * more text
-   * 
-   * @param scenarioId 
-   * @returns 
+   *
+   * @param scenarioId
+   * @returns
    */
   public async getScenarioById(scenarioId: string): Promise<Scenario | undefined> {
     const docRef = doc(this.scenariosRef, scenarioId);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
-  }
-
-  gotoRandomScenario() {
-    // Logic to navigate to a random scenario
-    console.log('Navigating to a random scenario');
-    this.getRandomScenario().then(scenario => {
-      console.log('Random Scenario ID:', scenario.id);
-      this.router.navigate(['/scenario', scenario.id]);
-    });
   }
 
   public async addScenario(scenario: Omit<Scenario, 'id'>): Promise<string> {
