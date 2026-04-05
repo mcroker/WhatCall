@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatIcon } from "@angular/material/icon";
 import { ENTER, COMMA, SEMICOLON } from '@angular/cdk/keycodes';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-scenario-upload',

@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { ScenarioComponent } from '../scenario/scenario';
-import { ActiveScenarioService } from '../../services/activeScenarioService';
+import { ScenarioPageController } from '../scenario/scenarioPageController';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatMenuModule, MatIconModule],
+  imports: [RouterOutlet, MatMenuModule, MatIconModule, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -15,14 +14,14 @@ export class App {
 
   constructor(
     private router: Router,
-    private activeScenarioService: ActiveScenarioService
-  ) {
-
+    private scenarioPageController: ScenarioPageController
+  ) { 
+    // Empty constructor for dependency injection
   }
 
   gotoRandonScenario() {
     this.router.navigate(['/scenario']);
-    this.activeScenarioService.loadScenario();
+    this.scenarioPageController.loadScenario();
   }
 
 }

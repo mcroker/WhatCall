@@ -1,19 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { ScenarioStats } from '../../services/responseService';
+import { ScenarioStats } from '../../services';
 
 const EMPTY_CHART_DATA: ChartData<'bar'> = {
     labels: [],
-    datasets: [
-    ],
+    datasets: []
   }
 
 @Component({
   selector: 'app-responses-chart',
   imports: [BaseChartDirective],
   templateUrl: './responses-chart.html',
-  styleUrl: './responses-chart.scss',
+  styleUrl: './responses-chart.scss'
 })
 export class ResponsesChartComponent {
 

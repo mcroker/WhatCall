@@ -1,23 +1,12 @@
 import { Component } from '@angular/core';
-import { ScenarioService } from '../../services/scenarioService';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, MatButtonModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class HomeComponent {
-
-  constructor(
-    private scenarioService: ScenarioService,
-    private router: Router
-  ) {
-    console.log('App component initialized');
-  }
-
-  gotoUploadScenario() {
-    this.router.navigate(['/scenario-upload', 1]);
-  }
 }

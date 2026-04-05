@@ -1,12 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Scenario } from '../../services/scenarioService';
-import { ResponseService, ScenarioStats } from '../../services/responseService';
+import { ActivatedRoute } from '@angular/router';
+import { ScenarioService, ScenarioWithResponses } from '../../services';
+import { ScenarioPageController } from './scenarioPageController';
 import { VideoPlayerComponent } from '../video-player/video-player';
 import { UserResponseComponent } from '../user-response/user-response';
 import { ResponsesChartComponent } from '../responses-chart/responses-chart';
 import { Location } from '@angular/common';
-import { ActiveScenarioService } from '../../services/activeScenarioService';
 
 @Component({
   selector: 'app-scenario',
@@ -16,51 +15,40 @@ import { ActiveScenarioService } from '../../services/activeScenarioService';
 })
 export class ScenarioComponent implements OnInit {
 
-  public scenario: Scenario | undefined = undefined;
-  public scenarioStats: ScenarioStats | undefined = undefined;
-  public userResponse: string | undefined = undefined;
-
+  public scenario: ScenarioWithResponses | undefined = undefined;
+  
   constructor(
     private activatedRoute: ActivatedRoute,
-    private activeScenarioService: ActiveScenarioService,
-    private responseService: ResponseService,
+    private pageController: ScenarioPageController,
+    private scenarioService: ScenarioService,
     private changeDetector: ChangeDetectorRef,
     private location: Location
   ) {
+    // Empty constructor; all initialization logic is in ngOnInit
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async params => {
-      await this.activeScenarioService.loadScenario(params['id']);
+      await this.pageController.loadScenario(params['id']);
     })
-    this.activeScenarioService.scenario$.subscribe(activeScenario => {
-      this.scenario = activeScenario.scenario;
-      this.userResponse = activeScenario.response?.latestResponse;
-      this.location.replaceState(`/scenario/${activeScenario.scenario?.id}`);
+    this.pageController.activeScenario$.subscribe(activeScenario => {
+      console.log('Active scenario updated in component', activeScenario);
+      this.scenario = activeScenario;
+      this.location.replaceState(`/scenario/${activeScenario?.id}`);
       this.changeDetector.detectChanges();
     });
   }
 
   loadScenario(scenarioId?: string) {
-    this.activeScenarioService.loadScenario(scenarioId);
+    this.pageController.loadScenario(scenarioId);
   }
 
   async selectionMade(userResponse: string) {
     if (!this.scenario) {
       throw new Error('No scenario loaded');
     }
-    this.userResponse = userResponse;
-    this.responseService.addResponse(this.scenario.id, userResponse)
+    this.scenarioService.addResponse(this.scenario.id, userResponse)
     this.changeDetector.detectChanges();
-    if (this.scenario) {
-      this.responseService.getScenarioStats(this.scenario.id).then((stats) => {
-        this.scenarioStats = stats;
-        this.changeDetector.detectChanges();
-        console.log('Stats retrieved', stats);
-      })
-    } else {
-      throw new Error('No scenario loaded');
-    }
   }
 
 }

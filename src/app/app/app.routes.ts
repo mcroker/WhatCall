@@ -14,7 +14,7 @@ export const routes: Routes = [
     'component': ScenarioComponent
   },
   {
-    'path': 'scenario-upload/:id',
+    'path': 'scenario-upload',
     'component': ScenarioUploadComponent
   },
   { path: '**', component: HomeComponent },
