@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { ScenarioService } from '../../services/scenarioService';
 import { Router, RouterLink } from '@angular/router';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, MatMenuModule, MatIconModule],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

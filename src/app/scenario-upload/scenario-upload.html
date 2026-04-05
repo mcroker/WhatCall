@@ -1,26 +1,52 @@
 <main class="main">
-  <h1>Upload Scenario</h1>
 
-  <form (ngSubmit)="save()" [formGroup]="form">
-    <input type="text" formControlName="title" placeholder="Title">
-    <input type="text" formControlName="description" placeholder="Description">
-    <input type="text" formControlName="scenarioType" placeholder="Scenario Type">
-    <input type="text" formControlName="url" placeholder="URL">
-    
-    <div>
-      <h3>Possible Answers</h3>
-      <div formArrayName="options" required>
-        <div *ngFor="let option of optionsArray.controls; let i = index">
-          <input 
-            type="text" 
-            [formControl]="$any(option)" 
-            placeholder="Enter a possible response">
-          <button type="button" (click)="removeOption(i)">Remove</button>
-        </div>
-      </div>
-      <button type="button" (click)="addOption()">Add Answer Option</button>
-    </div>
+  <form [formGroup]="form" (ngSubmit)="save()">
 
-    <button type="submit" [disabled]="form.invalid">Save</button>
+    <h1>Upload Scenario</h1>
+    <p>
+      <mat-form-field>
+        <mat-label>Scenario Title</mat-label>
+        <input matInput type="text" placeholder="Title" formControlName="title">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Scenario Description</mat-label>
+        <input matInput type="text" placeholder="Scenario" formControlName="description">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Scenario Type</mat-label>
+        <input matInput type="text" placeholder="Scenario Type" formControlName="scenarioType">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Video URL</mat-label>
+        <input matInput type="url" placeholder="Video URL" formControlName="url">
+      </mat-form-field>
+    </p>
+
+    <section>
+      <h4>Chips inside of a Reactive form</h4>
+      <mat-form-field class="example-form-field">
+        <mat-label>Video keywords</mat-label>
+        <mat-chip-grid #reactiveChipGrid aria-label="Enter reactive form keywords" formControlName="options">
+          @for (keyword of reactiveKeywords(); track keyword) {
+          <mat-chip-row (removed)="removeReactiveKeyword(keyword)">
+            {{keyword}}
+            <button matChipRemove [attr.aria-label]="'remove reactive form' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input placeholder="New keyword..." [matChipInputFor]="reactiveChipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addReactiveKeyword($event)" />
+      </mat-form-field>
+    </section>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Save Scenario</button>
   </form>
 </main>
