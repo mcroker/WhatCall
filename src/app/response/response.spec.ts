@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScenarioComponent } from './scenario';
+import { Response } from './response';
 
-describe('Scenarioview', () => {
-  let component: ScenarioComponent;
-  let fixture: ComponentFixture<ScenarioComponent>;
+describe('Response', () => {
+  let component: Response;
+  let fixture: ComponentFixture<Response>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScenarioComponent]
+      imports: [Response]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ScenarioComponent);
+    fixture = TestBed.createComponent(Response);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

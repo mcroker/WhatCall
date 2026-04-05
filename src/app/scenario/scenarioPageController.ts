@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 // Import the functions you need from the SDKs you need
 import { ScenarioService, ScenarioWithResponses, ProfileService } from '../../services';
-import { BehaviorSubject, map, Observable, switchAll, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchAll } from 'rxjs';
 
 /**
 /**
@@ -18,9 +18,6 @@ export class ScenarioPageController {
 
   public activeScenario$: Observable<ScenarioWithResponses | undefined> = this.activeScenarioId$
     .pipe(
-      tap(
-        scenarioId => console.log('Scenario ID changed in controller', scenarioId)
-      ),
       map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
       switchAll()
     );

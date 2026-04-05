@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScenarioComponent } from './scenario';
+import { Upload } from './upload';
 
-describe('Scenarioview', () => {
-  let component: ScenarioComponent;
-  let fixture: ComponentFixture<ScenarioComponent>;
+describe('Upload', () => {
+  let component: Upload;
+  let fixture: ComponentFixture<Upload>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScenarioComponent]
+      imports: [Upload]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ScenarioComponent);
+    fixture = TestBed.createComponent(Upload);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
