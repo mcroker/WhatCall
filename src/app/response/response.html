@@ -1,7 +1,0 @@
-@if ((scenario$ | async)?.myResponse !== undefined) {
-<p>You selected {{ (scenario$ | async)?.myResponse?.latestResponse }}</p>
-}
-<app-responses-chart [scenarioStats]="(scenario$ | async)?.stats"></app-responses-chart>
-<div class="main-container">
-  <button class="next-button" matButton="filled" (click)="gotoNext()">Next</button>
-</div>
