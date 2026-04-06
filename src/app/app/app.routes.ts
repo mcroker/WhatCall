@@ -11,9 +11,13 @@ export const routes: Routes = [
     'path': 'scenario',
     loadComponent: () => import('../scenario/scenario').then(m => m.ScenarioComponent)
   },
-    {
+  {
     'path': 'about',
     loadComponent: () => import('../about/about').then(m => m.AboutComponent)
+  },
+  {
+    'path': 'auth',
+    loadComponent: () => import('../auth-screen/auth-screen').then(m => m.AuthScreenComponent)
   },
   { path: '**', component: HomeComponent },
 ];

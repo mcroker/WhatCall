@@ -9,7 +9,6 @@ import { ProfileService } from './profileService';
 
 import { responseConverter, Scenario, scenarioConverter, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from './types';
 import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
-import { F } from '@angular/cdk/keycodes';
 
 /**
  * Service to interact with video data from Firestore.

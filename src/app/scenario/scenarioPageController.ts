@@ -29,7 +29,6 @@ export class ScenarioPageController {
   }
 
   async loadScenario(scenarioId?: string) {
-    await this.profileService.login();
     if (!scenarioId) {
       scenarioId = await this.scenarioService.getRandomScenarioId()
     }

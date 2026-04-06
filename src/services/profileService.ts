@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '../types/profile';
-import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
-import { Auth } from '@angular/fire/auth';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +32,7 @@ export class ProfileService {
     console.log('Profile updated:', profile);
   }
 
+  /*
   async login(): Promise<void> {
     try {
       const x = await signInAnonymously(this.auth);
@@ -42,5 +42,6 @@ export class ProfileService {
       console.error('Error during anonymous sign-in:', error);
     }
   }
+  */
 
 }

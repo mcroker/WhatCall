@@ -6,6 +6,13 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import {
+  autoAnonymousLogin,
+  autoUpgradeAnonymousUsers,
+  initializeUI,
+  providerPopupStrategy
+} from '@firebase-oss/ui-core';
+import { provideFirebaseUI, provideFirebaseUIPolicies } from '@firebase-oss/ui-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +32,22 @@ export const appConfig: ApplicationConfig = {
     })),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    provideFirebaseUI((apps) => initializeUI({
+      app: apps[0],
+      behaviors: [
+        autoAnonymousLogin(),
+        autoUpgradeAnonymousUsers({
+          async onUpgrade(ui, oldUserId, credential) {
+            // Some account upgrade logic.
+          }
+        }),
+        providerPopupStrategy()
+      ],
+    })),
+    provideFirebaseUIPolicies(() => ({
+      termsOfServiceUrl: 'https://www.google.com',
+      privacyPolicyUrl: 'https://www.google.com',
+    })),
   ]
 };
