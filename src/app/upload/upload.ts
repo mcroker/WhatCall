@@ -10,7 +10,7 @@ import { ENTER, COMMA, SEMICOLON } from '@angular/cdk/keycodes';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
-import { ArrayValidators } from './arrayValidators';
+import * as ArrayValidators from './arrayValidators';
 
 @Component({
   standalone: true,
@@ -105,7 +105,7 @@ export class UploadComponent {
       throw new Error('User not logged in');
     }
 
-    var fileUrl = this.firstFormGroup.value.url;
+    let fileUrl = this.firstFormGroup.value.url;
     if (file !== undefined) {
       const fileId = (new Date()).toISOString()
       fileUrl = await this.storageService.upload(uid, fileId, file);

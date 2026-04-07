@@ -49,7 +49,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   // Instantiate a Video.js player OnInit
   ngOnInit() {
-    const self = this;
     videojs(this.target.nativeElement, { "techOrder": ["youtube"], "youtube": { "ytControls": 2 }, fluid: true })
       .ready(() => {
         console.log('VideoPlayer: player is ready');

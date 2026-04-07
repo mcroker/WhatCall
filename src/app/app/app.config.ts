@@ -15,7 +15,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    // provideCharts(withDefaultRegisterables()),
     provideFirebaseApp(() => initializeApp({
       projectId: "whatcall-52d6a",
       appId: "1:139166244778:web:4f0914dc3a5eca506955d3",
@@ -31,9 +30,11 @@ export const appConfig: ApplicationConfig = {
       behaviors: [
         autoAnonymousLogin(),
         autoUpgradeAnonymousUsers({
-          async onUpgrade(ui, oldUserId, credential) {
+          /*
+          // async onUpgrade(ui, oldUserId, credential) {
             // Some account upgrade logic.
           }
+          */
         }),
         providerPopupStrategy()
       ],

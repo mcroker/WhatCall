@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UploadComponent } from './upload';
-import { Auth, NextOrObserver, Unsubscribe, User } from '@angular/fire/auth';
-import { FirebaseApp } from '@angular/fire/app';
 import { ProfileService, ScenarioService, StorageService } from '../../services';
 import { MatDialogRef } from '@angular/material/dialog';
 

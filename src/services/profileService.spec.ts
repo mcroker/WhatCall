@@ -11,6 +11,7 @@ describe('ProfileService', () => {
         {
           provide: Auth,
           useValue: {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onAuthStateChanged: (auth: Auth, nextOrObserver: NextOrObserver<User>): Unsubscribe => {
               return () => { }
             }

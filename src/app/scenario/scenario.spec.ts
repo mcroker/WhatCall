@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScenarioComponent } from './scenario';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Auth, NextOrObserver, Unsubscribe, User } from '@angular/fire/auth';
-import { FirebaseApp } from '@angular/fire/app';
+import { ActivatedRoute } from '@angular/router';
 import { Firestore } from '@angular/fire/firestore';
 import { ScenarioService } from '../../services';
 import { ScenarioPageController } from './scenarioPageController';
