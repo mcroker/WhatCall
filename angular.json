@@ -59,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "x:build:production"
+              "buildTarget": "whatcall:build:production"
             },
             "development": {
-              "buildTarget": "x:build:development"
+              "buildTarget": "whatcall:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,9 +88,19 @@
               "src/styles.scss"
             ]
           }
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "whatcall:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "whatcall:serve:production"
+            }
+          }
         }
       }
     }
   }
-
 }
