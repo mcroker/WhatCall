@@ -15,13 +15,6 @@ describe('Scenario', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get(): string {
-                  return '123';
-                },
-              },
-            },
           },
         },
         {
