@@ -4,6 +4,7 @@ import Player from "video.js/dist/types/player";
 import 'videojs-youtube'
 
 @Component({
+  standalone: true,
   selector: 'app-video-player',
   templateUrl: './video-player.html',
   styleUrls: [

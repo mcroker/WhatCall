@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
       /// projectNumber: "139166244778",
       // version: "2"
     })),
-    provideFirestore(() => getFirestore()),
+    // provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
     provideFirebaseUI((apps) => initializeUI({

@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "doc": "npx typedoc --out docs --entryPointStrategy Expand src  --exclude **/*.spec.ts --excludePrivate --excludeExternals --includeVersion",
-    "uml": "tsuml2 --glob \"./src/**/!(*.d|*.spec).ts\" --outFile  ./docs/uml.svg"
+    "uml": "tsuml2 --glob \"./src/**/!(*.d|*.spec).ts\" --outFile  ./docs/uml.svg",
+    "sme": "ng build --source-map=true --named-chunks==true && source-map-explorer dist/whatcall/**/*.js --no-border-checks"
   },
   "prettier": {
     "printWidth": 100,
@@ -26,6 +27,7 @@
   "packageManager": "npm@10.9.4",
   "dependencies": {
     "@angular-devkit/build-angular": "~20.2.2",
+    "@angular/cdk": "~20.2.0",
     "@angular/cli": "~20.2.2",
     "@angular/common": "~20.2.2",
     "@angular/compiler": "~20.2.2",
@@ -33,11 +35,10 @@
     "@angular/core": "~20.2.2",
     "@angular/fire": "~20.0.1",
     "@angular/forms": "~20.2.2",
+    "@angular/material": "~20.2.14",
     "@angular/platform-browser": "~20.2.2",
     "@angular/platform-browser-dynamic": "~20.2.2",
     "@angular/router": "~20.2.2",
-    "@angular/cdk": "~20.2.0",
-    "@angular/material": "~20.2.14",
     "@firebase-oss/ui-angular": "^7.0.2-beta",
     "@types/video.js": "^7.3.58",
     "chart.js": "^4.5.1",
@@ -61,6 +62,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "source-map-explorer": "^2.5.3",
     "typedoc": "^0.28.15",
     "typescript": "~5.9.2",
     "vitest": "^3.1.1"
