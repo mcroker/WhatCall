@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
-import { getDownloadURL, ref, StorageReference, uploadBytes, Storage } from '@angular/fire/storage';
+import { inject, Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire/app';
+import { getDownloadURL, ref, StorageReference, uploadBytes, Storage, getStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
 
+  private storage: Storage;
+
   constructor(
-    private storage: Storage
   ) {
+    this.storage = getStorage(inject(FirebaseApp))
   }
 
   public async upload(uid: string, scenarioId: string, file: File): Promise<string> {

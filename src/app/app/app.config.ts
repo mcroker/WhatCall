@@ -1,9 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import {
   autoAnonymousLogin,
@@ -27,7 +25,6 @@ export const appConfig: ApplicationConfig = {
       messagingSenderId: "139166244778",
       measurementId: "G-TDXW9BDJ3G"
     })),
-    provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
     provideFirebaseUI((apps) => initializeUI({
       app: apps[0],
