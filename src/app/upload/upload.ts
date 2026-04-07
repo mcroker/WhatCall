@@ -13,6 +13,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ArrayValidators } from './arrayValidators';
 
 @Component({
+  standalone: true,
   selector: 'app-upload',
   templateUrl: './upload.html',
   styleUrl: './upload.scss',

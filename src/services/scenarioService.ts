@@ -25,7 +25,7 @@ export class ScenarioService {
   constructor(
     private profileService: ProfileService
   ) {
-    this.firestore = getFirestore(inject(FirebaseApp));
+    this.firestore = this.getFirestore()
   }
 
   /**
@@ -184,6 +184,10 @@ export class ScenarioService {
 
   private get scenariosRef(): CollectionReference {
     return collection(this.firestore, "scenarios").withConverter(scenarioConverter);
+  }
+
+  public getFirestore() {
+    return getFirestore(inject(FirebaseApp));
   }
 
 }
