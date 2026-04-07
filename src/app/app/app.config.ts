@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import {
@@ -18,7 +17,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideCharts(withDefaultRegisterables()),
+    // provideCharts(withDefaultRegisterables()),
     provideFirebaseApp(() => initializeApp({
       projectId: "whatcall-52d6a",
       appId: "1:139166244778:web:4f0914dc3a5eca506955d3",
@@ -27,10 +26,7 @@ export const appConfig: ApplicationConfig = {
       authDomain: "whatcall-52d6a.firebaseapp.com",
       messagingSenderId: "139166244778",
       measurementId: "G-TDXW9BDJ3G"
-      /// projectNumber: "139166244778",
-      // version: "2"
     })),
-    // provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
     provideFirebaseUI((apps) => initializeUI({
