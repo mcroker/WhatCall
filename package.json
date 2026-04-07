@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "lint": "npx eslint src",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "doc": "npx typedoc --out docs --entryPointStrategy Expand src  --exclude **/*.spec.ts --excludePrivate --excludeExternals --includeVersion",
     "uml": "tsuml2 --glob \"./src/**/!(*.d|*.spec).ts\" --outFile  ./docs/uml.svg",
-    "sme": "ng build --source-map=true --named-chunks==true && source-map-explorer dist/whatcall/**/*.js --no-border-checks",
+    "lint": "npx eslint src",
+    "sme": "ng build --configuration=production --source-map=true --named-chunks==true && source-map-explorer dist/whatcall/**/*.js --no-border-checks",
     "e2e": "ng e2e"
   },
   "prettier": {
